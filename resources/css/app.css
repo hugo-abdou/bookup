@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+    .bg-gradient-primary {
+        @apply bg-gradient-to-r from-teal-500 to-cyan-600;
+    }
+}
