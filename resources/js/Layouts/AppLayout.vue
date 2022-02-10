@@ -4,10 +4,16 @@
 
 		<jet-banner />
 
-		<div class="min-h-screen bg-gray-100 pt-16 pl-64">
+		<div
+			:class="[
+		'min-h-screen bg-gray-100 pt-16 duration-500 lg:pl-64',
+		!showingSideBar ? '': ''
+		]"
+		>
+			<!-- navbar -->
 			<nav ref="navbar" class="fixed inset-x-0 z-50 top-0">
 				<!-- Primary Navigation Menu -->
-				<div class="bg-gradient-primary shadow-md shadow-teal-500/30">
+				<div class="bg-gradient-primary shadow">
 					<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 						<div class="flex justify-between h-16">
 							<div class="flex justify-between w-full">
@@ -39,8 +45,33 @@
 								<div class="hidden space-x-4 sm:-my-px sm:ml-10 sm:flex"></div>
 							</div>
 
-							<div class="hidden sm:flex sm:items-center sm:ml-6">
-								<div class="ml-3 relative">
+							<!-- Hamburger -->
+							<div class="-mr-2 flex items-center lg:hidden">
+								<button
+									@click="showingSideBar = ! showingSideBar"
+									class="inline-flex items-center justify-center p-1.5 rounded-md text-white hover:text-gray-500 hover:bg-gray-100 focus:outline-none bg-white/40 focus:bg-gray-100 focus:text-gray-500 transition"
+								>
+									<svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+										<path
+											:class="{'hidden': showingSideBar, 'inline-flex': ! showingSideBar }"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M4 6h16M4 12h16M4 18h16"
+										/>
+										<path
+											:class="{'hidden': ! showingSideBar, 'inline-flex': showingSideBar }"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M6 18L18 6M6 6l12 12"
+										/>
+									</svg>
+								</button>
+							</div>
+
+							<div class="flex items-center">
+								<div class="ml-2 relative">
 									<!-- Teams Dropdown -->
 									<jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
 										<template #trigger>
@@ -115,12 +146,12 @@
 								</div>
 
 								<!-- Settings Dropdown -->
-								<div class="ml-3 relative">
+								<div class="ml-2 relative">
 									<jet-dropdown align="right" width="48">
 										<template #trigger>
 											<button
 												v-if="$page.props.jetstream.managesProfilePhotos"
-												class="flex text-sm border-2 border-transparent h-9 w-9 overflow-hidden rounded-full focus:outline-none focus:border-transparent transition"
+												class="flex text-sm border-2 border-transparent h-10 w-10 overflow-hidden rounded-full focus:outline-none focus:border-transparent transition"
 											>
 												<img
 													class="object-fill w-full h-full"
@@ -155,7 +186,11 @@
 											<!-- Account Management -->
 											<div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
 
-											<jet-dropdown-link :href="route('profile.show')">Profile</jet-dropdown-link>
+											<jet-dropdown-link :href="route('profile.show')">
+												<span class="flex">
+													<CogIcon class="w-5 text-gray-500 mr-2" />Settings
+												</span>
+											</jet-dropdown-link>
 
 											<jet-dropdown-link
 												:href="route('api-tokens.index')"
@@ -166,139 +201,28 @@
 
 											<!-- Authentication -->
 											<form @submit.prevent="logout">
-												<jet-dropdown-link as="button">Log Out</jet-dropdown-link>
+												<jet-dropdown-link as="button">
+													<span class="flex">
+														<LogoutIcon class="w-5 text-gray-500 mr-2" />Log Out
+													</span>
+												</jet-dropdown-link>
 											</form>
 										</template>
 									</jet-dropdown>
 								</div>
 							</div>
-
-							<!-- Hamburger -->
-							<div class="-mr-2 flex items-center sm:hidden">
-								<button
-									@click="showingNavigationDropdown = ! showingNavigationDropdown"
-									class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
-								>
-									<svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-										<path
-											:class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M4 6h16M4 12h16M4 18h16"
-										/>
-										<path
-											:class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M6 18L18 6M6 6l12 12"
-										/>
-									</svg>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Responsive Navigation Menu -->
-				<div
-					:class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
-					class="sm:hidden m-2 shadow-md rounded-md border bg-white"
-				>
-					<div class="pt-2 pb-3 space-y-1">
-						<jet-responsive-nav-link
-							:href="route('dashboard')"
-							:active="route().current('dashboard')"
-						>Dashboard</jet-responsive-nav-link>
-					</div>
-
-					<!-- Responsive Settings Options -->
-					<div class="pt-4 pb-1 border-t border-gray-200">
-						<div class="flex items-center px-4">
-							<div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
-								<img
-									class="h-10 w-10 rounded-full object-cover"
-									:src="$page.props.user.profile_photo_url"
-									:alt="$page.props.user.name"
-								/>
-							</div>
-
-							<div>
-								<div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
-								<div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
-							</div>
-						</div>
-
-						<div class="mt-3 space-y-1">
-							<jet-responsive-nav-link
-								:href="route('profile.show')"
-								:active="route().current('profile.show')"
-							>Profile</jet-responsive-nav-link>
-
-							<jet-responsive-nav-link
-								:href="route('api-tokens.index')"
-								:active="route().current('api-tokens.index')"
-								v-if="$page.props.jetstream.hasApiFeatures"
-							>API Tokens</jet-responsive-nav-link>
-
-							<!-- Authentication -->
-							<form method="POST" @submit.prevent="logout">
-								<jet-responsive-nav-link as="button">Log Out</jet-responsive-nav-link>
-							</form>
-
-							<!-- Team Management -->
-							<template v-if="$page.props.jetstream.hasTeamFeatures">
-								<div class="border-t border-gray-200"></div>
-
-								<div class="block px-4 py-2 text-xs text-gray-400">Manage Team</div>
-
-								<!-- Team Settings -->
-								<jet-responsive-nav-link
-									:href="route('teams.show', $page.props.user.current_team)"
-									:active="route().current('teams.show')"
-								>Team Settings</jet-responsive-nav-link>
-
-								<jet-responsive-nav-link
-									:href="route('teams.create')"
-									:active="route().current('teams.create')"
-									v-if="$page.props.jetstream.canCreateTeams"
-								>Create New Team</jet-responsive-nav-link>
-
-								<div class="border-t border-gray-200"></div>
-
-								<!-- Team Switcher -->
-								<div class="block px-4 py-2 text-xs text-gray-400">Switch Teams</div>
-
-								<template v-for="team in $page.props.user.all_teams" :key="team.id">
-									<form @submit.prevent="switchToTeam(team)">
-										<jet-responsive-nav-link as="button">
-											<div class="flex items-center">
-												<svg
-													v-if="team.id == $page.props.user.current_team_id"
-													class="mr-2 h-5 w-5 text-green-400"
-													fill="none"
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													stroke-width="2"
-													stroke="currentColor"
-													viewBox="0 0 24 24"
-												>
-													<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-												</svg>
-												<div>{{ team.name }}</div>
-											</div>
-										</jet-responsive-nav-link>
-									</form>
-								</template>
-							</template>
 						</div>
 					</div>
 				</div>
 			</nav>
 			<!-- Side bar -->
-			<div class="fixed inset-y-0 left-0 z-[49] w-64 pt-16 border-r border-gray-200 bg-white">
-				<div class="pl-4 pr-6 py-6 sm:pl-6 lg:pl-8">
+			<div
+				:class="[
+					'fixed inset-y-0 left-0 z-[49] w-64 pt-16 transform duration-500 border-r border-gray-200 bg-white lg:-translate-x-0',
+					!showingSideBar ? '-translate-x-64': ''
+				]"
+			>
+				<div class="py-5 px-4">
 					<div class="flex items-center justify-between">
 						<div class="flex-1 space-y-8">
 							<div class="space-y-8">
@@ -311,11 +235,15 @@
 											:alt="$page.props.user.name"
 										/>
 									</div>
-									<div class="space-y-1">
+									<div class="space-y-1 text-xs text-gray-500 font-medium">
 										<div class="text-sm font-medium text-gray-900">{{$page.props.user.name}}</div>
 										<span class="flex items-center space-x-1">
-											<UserCircleIcon class="text-gray-500 w-5" />
-											<span class="text-sm text-gray-500 font-medium">admin</span>
+											<UserCircleIcon class="w-5" />
+											<span>admin</span>
+										</span>
+										<span class="flex items-center space-x-1">
+											<MailIcon class="w-5" />
+											<span>{{$page.props.user.email}}</span>
 										</span>
 									</div>
 								</Link>
@@ -327,19 +255,21 @@
 							</div>
 							<!-- Meta info -->
 							<div class="space-y-4">
-								<jet-nav-link :href="route('home')" :active="route().current('home')">home</jet-nav-link>
-								<jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</jet-nav-link>
-								<jet-nav-link
-									:href="route('profile.show')"
-									:active="route().current('profile.show')"
-								>profile</jet-nav-link>
+								<jet-nav-link :href="route('home')" :active="route().current('home')">
+									<HomeIcon class="w-5" />
+									<span>home</span>
+								</jet-nav-link>
+								<jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+									<MenuAlt2Icon class="w-5" />
+									<span>Dashboard</span>
+								</jet-nav-link>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Page Content -->
-			<main>
+			<main class="max-w-[100vw] overflow-auto">
 				<slot></slot>
 			</main>
 		</div>
@@ -355,7 +285,16 @@ import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import { SearchIcon, UserCircleIcon } from "@heroicons/vue/outline";
+import {
+	SearchIcon,
+	UserCircleIcon,
+	MenuAlt2Icon,
+	UserIcon,
+	HomeIcon,
+	MailIcon,
+	CogIcon,
+	LogoutIcon,
+} from "@heroicons/vue/outline";
 import Button from "../Jetstream/Button.vue";
 import SecondaryButton from "../Jetstream/SecondaryButton.vue";
 
@@ -377,11 +316,17 @@ export default defineComponent({
 		Button,
 		SecondaryButton,
 		UserCircleIcon,
+		MenuAlt2Icon,
+		UserIcon,
+		HomeIcon,
+		MailIcon,
+		CogIcon,
+		LogoutIcon,
 	},
 
 	data() {
 		return {
-			showingNavigationDropdown: false,
+			showingSideBar: false,
 			classes: "",
 		};
 	},
