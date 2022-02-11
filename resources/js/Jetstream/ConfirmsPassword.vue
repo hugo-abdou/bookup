@@ -16,7 +16,7 @@
 						placeholder="Password"
 						ref="password"
 						v-model="form.password"
-						:error="true"
+						:error="form.error"
 						@keyup.enter="confirmPassword"
 					/>
 

@@ -20,11 +20,12 @@ class ResetUserPassword implements ResetsUserPasswords
     public function reset($user, array $input)
     {
         Validator::make($input, [
-            'password' => $this->passwordRules(),
+            'password' => array_merge($this->passwordRules(), ['confirmed']),
         ])->validate();
 
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+        success('password rested successfuly');
     }
 }

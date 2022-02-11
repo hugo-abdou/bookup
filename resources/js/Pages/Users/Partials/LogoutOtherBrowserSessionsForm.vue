@@ -2,12 +2,20 @@
 	<jet-action-section>
 		<template #title>Browser Sessions</template>
 
-		<template #description>Manage and log out your active sessions on other browsers and devices.</template>
+		<template #description>
+			Manage and log out
+			<b>{{user.name}}</b> active sessions on other browsers and devices.
+		</template>
 
 		<template #content>
-			<div
-				class="max-w-xl text-sm text-gray-600"
-			>If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.</div>
+			<div class="max-w-xl text-sm text-gray-600">
+				If necessary, you may log out all of
+				<b>{{user.name}}</b> other browser sessions across all of this
+				<b>{{user.name}}</b> devices. Some of
+				<b>{{user.name}}</b> recent sessions are listed below; however, this list may not be exhaustive. If you feel
+				<b>{{user.name}}</b> account has been compromised, you should also update
+				<b>{{user.name}}</b> password.
+			</div>
 
 			<!-- Other Browser Sessions -->
 			<div class="mt-5 space-y-6" v-if="sessions.length > 0">
@@ -75,7 +83,10 @@
 				<template #title>Log Out Other Browser Sessions</template>
 
 				<template #content>
-					Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.
+					Please enter
+					<b>your</b> password to confirm you would like to log out of
+					<b>{{user.name}}</b> from other browser sessions across all of
+					<b>{{user.name}}</b> devices.
 					<div class="mt-4">
 						<jet-input
 							type="password"
@@ -117,7 +128,7 @@ import JetInputError from "@/Jetstream/InputError.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 
 export default defineComponent({
-	props: ["sessions"],
+	props: ["sessions", "user"],
 
 	components: {
 		JetActionMessage,
@@ -147,12 +158,15 @@ export default defineComponent({
 		},
 
 		logoutOtherBrowserSessions() {
-			this.form.delete(route("other-browser-sessions.destroy"), {
-				preserveScroll: true,
-				onSuccess: () => this.closeModal(),
-				onError: () => this.$refs.password.focus(),
-				onFinish: () => this.form.reset(),
-			});
+			this.form.put(
+				route("users.update", this.user.id) + "?action=destroy_sessions",
+				{
+					preserveScroll: true,
+					onSuccess: () => this.closeModal(),
+					onError: () => this.$refs.password.focus(),
+					onFinish: () => this.form.reset(),
+				}
+			);
 		},
 
 		closeModal() {

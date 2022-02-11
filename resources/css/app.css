@@ -6,4 +6,10 @@
     .bg-gradient-primary {
         @apply bg-gradient-to-r from-teal-500 to-cyan-600;
     }
+    .scrollbar-thumb-rounded-full::-webkit-scrollbar-thumb {
+        border-radius: 9999px;
+    }
+    .scrollbar-track-rounded-full::-webkit-scrollbar-track {
+        border-radius: 9999px;
+    }
 }

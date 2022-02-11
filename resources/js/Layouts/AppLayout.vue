@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class>
 		<Head :title="title" />
 
 		<jet-banner />
@@ -19,7 +19,7 @@
 							<div class="flex justify-between w-full">
 								<!-- Logo -->
 								<div class="shrink-0 flex items-center">
-									<Link :href="route('dashboard')">
+									<Link :href="route('home')">
 										<jet-application-mark class="block h-9 w-auto" />
 									</Link>
 								</div>
@@ -255,13 +255,14 @@
 							</div>
 							<!-- Meta info -->
 							<div class="space-y-4">
-								<jet-nav-link :href="route('home')" :active="route().current('home')">
-									<HomeIcon class="w-5" />
-									<span>home</span>
-								</jet-nav-link>
-								<jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-									<MenuAlt2Icon class="w-5" />
-									<span>Dashboard</span>
+								<jet-nav-link
+									v-for="link in sideBarLinks"
+									:key="link.name"
+									:href="route(link.route)"
+									:active="route().current(link.route)"
+								>
+									<component :is="link.icon" class="w-5" />
+									<span>{{link.name}}</span>
 								</jet-nav-link>
 							</div>
 						</div>
@@ -269,15 +270,20 @@
 				</div>
 			</div>
 			<!-- Page Content -->
-			<main class="max-w-[100vw] overflow-auto">
-				<slot></slot>
+			<main
+				class="h-[calc(100vh-64px)] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+			>
+				<div class="max-w-7xl mx-auto py-10 sm:px-2 lg:px-8">
+					<h1 class="text-2xl font-bold text-gray-600 mb-5">{{title}}</h1>
+					<slot></slot>
+				</div>
 			</main>
 		</div>
 	</div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
 import JetBanner from "@/Jetstream/Banner.vue";
 import JetDropdown from "@/Jetstream/Dropdown.vue";
@@ -290,13 +296,14 @@ import {
 	UserCircleIcon,
 	MenuAlt2Icon,
 	UserIcon,
-	HomeIcon,
-	MailIcon,
 	CogIcon,
+	MailIcon,
 	LogoutIcon,
 } from "@heroicons/vue/outline";
 import Button from "../Jetstream/Button.vue";
 import SecondaryButton from "../Jetstream/SecondaryButton.vue";
+import { sideBarLinks } from "@config";
+import { Inertia } from "@inertiajs/inertia";
 
 export default defineComponent({
 	props: {
@@ -318,21 +325,17 @@ export default defineComponent({
 		UserCircleIcon,
 		MenuAlt2Icon,
 		UserIcon,
-		HomeIcon,
-		MailIcon,
 		CogIcon,
+		MailIcon,
 		LogoutIcon,
 	},
 
-	data() {
-		return {
-			showingSideBar: false,
-			classes: "",
-		};
-	},
-	methods: {
-		switchToTeam(team) {
-			this.$inertia.put(
+	setup() {
+		const showingSideBar = ref(false);
+		const classes = ref(false);
+
+		function switchToTeam(team) {
+			Inertia.put(
 				route("current-team.update"),
 				{
 					team_id: team.id,
@@ -341,11 +344,19 @@ export default defineComponent({
 					preserveState: false,
 				}
 			);
-		},
+		}
 
-		logout() {
-			this.$inertia.post(route("logout"));
-		},
+		function logout() {
+			Inertia.post(route("logout"));
+		}
+
+		return {
+			showingSideBar,
+			classes,
+			logout,
+			switchToTeam,
+			sideBarLinks,
+		};
 	},
 });
 </script>

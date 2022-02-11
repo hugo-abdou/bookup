@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,7 +23,16 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('users');
+        Route::get('/users/{user}/edit', 'edit')->name('users.edit');
+        Route::put('/users/{user}/update', 'update')->name('users.update');
+        Route::delete('/users/{user}', 'destroy')->name('users.destroy')
+            ->middleware(['password.confirm']);
+    });
+});

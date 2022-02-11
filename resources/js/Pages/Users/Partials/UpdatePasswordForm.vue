@@ -79,7 +79,7 @@ export default defineComponent({
 		JetInputError,
 		JetLabel,
 	},
-
+	props: ["user"],
 	data() {
 		return {
 			form: this.$inertia.form({
@@ -92,22 +92,26 @@ export default defineComponent({
 
 	methods: {
 		updatePassword() {
-			this.form.put(route("user-password.update"), {
-				errorBag: "updatePassword",
-				preserveScroll: true,
-				onSuccess: () => this.form.reset(),
-				onError: () => {
-					if (this.form.errors.password) {
-						this.form.reset("password", "password_confirmation");
-						this.$refs.password.focus();
-					}
+			this.form.put(
+				route("users.update", this.user.id) + "?action=update_password",
+				{
+					errorBag: "updatePassword",
+					preserveScroll: true,
+					preserveState: true,
+					onSuccess: () => this.form.reset(),
+					onError: () => {
+						if (this.form.errors.password) {
+							this.form.reset("password", "password_confirmation");
+							this.$refs.password.focus();
+						}
 
-					if (this.form.errors.current_password) {
-						this.form.reset("current_password");
-						this.$refs.current_password.focus();
-					}
-				},
-			});
+						if (this.form.errors.current_password) {
+							this.form.reset("current_password");
+							this.$refs.current_password.focus();
+						}
+					},
+				}
+			);
 		},
 	},
 });
