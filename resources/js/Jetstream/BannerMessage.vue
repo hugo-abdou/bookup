@@ -98,7 +98,6 @@ export default defineComponent({
 			let close = setTimeout(() => emit("close"), 5000);
 		});
 		onUnmounted(() => clearInterval(close));
-		return {};
 	},
 });
 </script>

@@ -24,13 +24,12 @@ export default defineComponent({
 			if (props.value.jetstream.flash.banner) {
 				banners.value.push({
 					...props.value.jetstream.flash,
-					// id: new Date().getTime().toString(36),
 				});
 			}
 		});
 
 		function close(index) {
-			banners.value = banners.value.filter((b, i) => i !== index);
+			banners.value.shift(index);
 		}
 
 		return {

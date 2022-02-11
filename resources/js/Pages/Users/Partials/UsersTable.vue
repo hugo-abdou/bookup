@@ -46,10 +46,14 @@
 								<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ person.role }}</td>
 								<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
 									<Link
+										v-if="$page.props.user.id !== person.id"
 										:href="route('users.edit',person.id)"
 										class="text-indigo-600 hover:text-indigo-900 inline-block"
 									>Edit</Link>
-									<JetConfirmsPassword @confirmed="destroy(person.id)">
+									<JetConfirmsPassword
+										v-if="$page.props.user.id !== person.id"
+										@confirmed="destroy(person.id)"
+									>
 										<a class="text-indigo-600 hover:text-indigo-900 cursor-pointer">delete</a>
 									</JetConfirmsPassword>
 								</td>
