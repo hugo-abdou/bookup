@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.4.3",
-        "@heroicons/vue": "^1.0.5"
+        "@heroicons/vue": "^1.0.5",
+        "@vueuse/core": "^7.6.1"
     }
 }

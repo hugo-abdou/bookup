@@ -1,0 +1,23 @@
+thead,
+tbody,
+th,
+tr,
+td {
+    @apply duration-300;
+}
+
+thead {
+    @apply bg-gray-50 dark:bg-gray-600;
+}
+tbody {
+    @apply divide-y divide-gray-200 dark:divide-gray-600;
+}
+thead tr th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider;
+}
+tbody tr {
+    @apply text-gray-500 dark:text-white bg-white dark:bg-gray-800 dark:hover:bg-gray-700  hover:bg-gray-50;
+}
+tbody tr td {
+    @apply px-6 py-4 whitespace-nowrap;
+}

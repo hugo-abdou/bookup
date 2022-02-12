@@ -1,18 +1,20 @@
 <template>
-	<div class="mt-5 md:mt-0">
-		<div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg space-y-2">
-			<jet-section-title>
-				<template #title>
-					<slot name="title"></slot>
-				</template>
-				<template #description>
-					<slot name="description"></slot>
-				</template>
-			</jet-section-title>
+    <div class="mt-5 md:mt-0">
+        <div
+            class="px-4 py-5 sm:p-6 bg-white dark:bg-gray-800 shadow sm:rounded-lg space-y-2"
+        >
+            <jet-section-title>
+                <template #title>
+                    <slot name="title"></slot>
+                </template>
+                <template #description>
+                    <slot name="description"></slot>
+                </template>
+            </jet-section-title>
 
-			<slot name="content"></slot>
-		</div>
-	</div>
+            <slot name="content"></slot>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -20,8 +22,8 @@ import { defineComponent } from "vue";
 import JetSectionTitle from "./SectionTitle.vue";
 
 export default defineComponent({
-	components: {
-		JetSectionTitle,
-	},
+    components: {
+        JetSectionTitle,
+    },
 });
 </script>
