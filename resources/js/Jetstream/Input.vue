@@ -1,7 +1,7 @@
 <template>
     <input
         :class="[
-            'border-gray-300 focus:border-teal-300 focus:ring-0 rounded-md shadow-sm bg-white bg-opacity-70',
+            'border-gray-300 focus:border-teal-300 focus:ring-0 rounded-md shadow-sm bg-white bg-opacity-10',
             error && '!border-red-600 !bg-red-600/20',
         ]"
         :value="modelValue"

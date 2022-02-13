@@ -1,6 +1,7 @@
 <template>
     <app-layout title="Users">
         <users-table />
+
         <actions>
             <secondary-button @click="">
                 <Link :href="route('users.create')">
@@ -8,17 +9,22 @@
                 </Link>
             </secondary-button>
         </actions>
+        <template #pagination>
+            <pagination :pages="$page.props.users" />
+        </template>
     </app-layout>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, onUnmounted, ref } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import UsersTable from "./Partials/UsersTable.vue";
 import Actions from "@/Jetstream/Actions.vue";
 import SecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import { PlusIcon } from "@heroicons/vue/outline";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, usePage } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
+import Pagination from "@/Jetstream/Pagination.vue";
 
 export default defineComponent({
     components: {
@@ -28,6 +34,7 @@ export default defineComponent({
         Actions,
         SecondaryButton,
         PlusIcon,
+        Pagination,
     },
     setup() {
         return {};

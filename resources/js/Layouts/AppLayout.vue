@@ -1,22 +1,22 @@
 <template>
-    <div class>
+    <div>
         <Head :title="title" />
 
         <jet-banner />
 
         <div
             :class="[
-                'min-h-screen pt-16 duration-300 lg:pl-64',
+                'duration-300 lg:pl-64 h-screen relative overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400',
                 !showingSideBar ? '' : '',
                 isDark ? 'bg-gray-900 ' : 'bg-gray-100 ',
             ]"
         >
             <!-- navbar -->
-            <nav ref="navbar" class="fixed inset-x-0 z-50 top-0">
+            <nav ref="navbar" class="fixed inset-x-0 z-50">
                 <!-- Primary Navigation Menu -->
                 <div class="bg-gradient-primary shadow">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between h-16">
+                        <div class="flex justify-between items-center h-16">
                             <div class="flex justify-between w-full">
                                 <!-- Logo -->
                                 <div class="shrink-0 flex items-center">
@@ -26,87 +26,42 @@
                                         />
                                     </Link>
                                 </div>
-                                <div
-                                    class="flex w-2/4 justify-center lg:justify-end mt-3"
-                                >
-                                    <div class="w-full px-2 lg:px-6">
-                                        <label for="search" class="sr-only"
-                                            >Search projects</label
-                                        >
-                                        <div class="relative text-cyan-700">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                                            >
-                                                <SearchIcon
-                                                    class="h-5 w-5"
-                                                    aria-hidden="true"
-                                                />
-                                            </div>
-                                            <input
-                                                id="search"
-                                                name="search"
-                                                class="block w-full pl-10 pr-3 py-2 rounded-md leading-5 bg-white/60 border-cyan-500 focus:border-cyan-500 focus:outline-none focus:ring-0 sm:text-sm"
-                                                placeholder="Search projects"
-                                                type="search"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <search />
 
                                 <!-- Navigation Links -->
-                                <div
-                                    class="hidden space-x-4 sm:-my-px sm:ml-10 sm:flex"
-                                ></div>
-                            </div>
-
-                            <!-- Hamburger -->
-                            <div class="-mr-2 flex items-center lg:hidden">
-                                <button
-                                    @click="showingSideBar = !showingSideBar"
-                                    class="inline-flex items-center justify-center p-1.5 rounded-md text-white hover:text-gray-500 hover:bg-gray-100 focus:outline-none bg-white/40 focus:bg-gray-100 focus:text-gray-500 transition"
-                                >
-                                    <svg
-                                        class="h-6 w-6"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
+                                <div class="flex items-center gap-x-2">
+                                    <!-- Hamburger -->
+                                    <button
+                                        @click="
+                                            showingSideBar = !showingSideBar
+                                        "
+                                        class="inline-flex items-center justify-center text-white hover:text-gray-300 focus:outline-none transition lg:hidden"
                                     >
-                                        <path
-                                            :class="{
-                                                hidden: showingSideBar,
-                                                'inline-flex': !showingSideBar,
-                                            }"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M4 6h16M4 12h16M4 18h16"
+                                        <MenuAlt2Icon
+                                            v-if="!showingSideBar"
+                                            class="h-6 w-6"
                                         />
-                                        <path
-                                            :class="{
-                                                hidden: !showingSideBar,
-                                                'inline-flex': showingSideBar,
-                                            }"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12"
+                                        <XIcon
+                                            v-if="showingSideBar"
+                                            class="h-6 w-6"
                                         />
-                                    </svg>
-                                </button>
+                                    </button>
+                                    <button
+                                        @click="toggleDark"
+                                        class="inline-flex items-center justify-center text-white hover:text-gray-300 focus:outline-none transition"
+                                    >
+                                        <MoonIcon v-if="isDark" class="w-6" />
+                                        <SunIcon v-else class="w-6" />
+                                        <span class="sr-only"
+                                            >toggle dark mode</span
+                                        >
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="flex items-center">
-                                <button
-                                    @click="toggleDark"
-                                    class="bg-white/50 p-1 rounded-full text-cyan-700 hover:text-gray-500 focus:outline-none"
-                                >
-                                    <MoonIcon v-if="isDark" class="w-5" />
-                                    <SunIcon v-else class="w-5" />
-                                    <span class="sr-only"
-                                        >toggle dark mode</span
-                                    >
-                                </button>
-                                <div class="ml-2 relative">
+                                <div class="relative">
                                     <!-- Teams Dropdown -->
                                     <jet-dropdown
                                         align="right"
@@ -434,13 +389,17 @@
             </div>
             <!-- Page Content -->
             <main
-                class="h-[calc(100vh-64px)] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+                class="relative max-w-7xl min-h-screen mx-auto py-20 sm:px-2 lg:px-8"
             >
-                <div class="max-w-7xl mx-auto py-10 sm:px-2 lg:px-8">
-                    <h1 class="text-2xl font-bold text-gray-600 mb-5">
-                        {{ title }}
-                    </h1>
-                    <slot></slot>
+                <h1 class="text-2xl font-bold text-gray-600 mb-5">
+                    {{ title }}
+                </h1>
+                <slot></slot>
+                <div
+                    v-if="$slots.pagination"
+                    class="absolute bottom-5 inset-x-10"
+                >
+                    <slot name="pagination"></slot>
                 </div>
             </main>
         </div>
@@ -448,7 +407,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, toRefs, watch } from "vue";
 import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
 import JetBanner from "@/Jetstream/Banner.vue";
 import JetDropdown from "@/Jetstream/Dropdown.vue";
@@ -457,7 +416,6 @@ import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import {
-    SearchIcon,
     UserCircleIcon,
     MenuAlt2Icon,
     UserIcon,
@@ -466,22 +424,27 @@ import {
     LogoutIcon,
     MoonIcon,
     SunIcon,
+    XIcon,
 } from "@heroicons/vue/outline";
 import Button from "../Jetstream/Button.vue";
 import SecondaryButton from "../Jetstream/SecondaryButton.vue";
 import { sideBarLinks, useDarkMode } from "@config";
 import { Inertia } from "@inertiajs/inertia";
-
+import Search from "./Search.vue";
 export default defineComponent({
     props: {
         title: String,
+        loadMoreWithScroll: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     components: {
         SunIcon,
+        XIcon,
         MoonIcon,
         Head,
-        SearchIcon,
         JetApplicationMark,
         JetBanner,
         JetDropdown,
@@ -497,9 +460,10 @@ export default defineComponent({
         CogIcon,
         MailIcon,
         LogoutIcon,
+        Search,
     },
 
-    setup() {
+    setup(props, { emit }) {
         const showingSideBar = ref(false);
         const classes = ref(false);
         const { isDark, toggleDark } = useDarkMode();

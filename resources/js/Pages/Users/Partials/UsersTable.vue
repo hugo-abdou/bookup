@@ -8,6 +8,7 @@
                     <table class="min-w-full">
                         <thead>
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Role</th>
@@ -19,6 +20,7 @@
                                 v-for="person in $page.props.users.data"
                                 :key="person.id"
                             >
+                                <td>{{ person.id }}</td>
                                 <td>
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -114,6 +116,7 @@ export default {
         const user = ref(null);
 
         const { destroy } = useDeleteUser(() => {
+            // onsuccess
             user.value = null;
         });
         return { destroy, user };

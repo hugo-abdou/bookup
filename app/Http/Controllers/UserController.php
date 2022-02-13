@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fortify\CreateNewUser;
 use Facades\{
     App\Actions\Jetstream\DeleteUser,
     App\Actions\Fortify\UpdateUserProfileInformation,
@@ -11,7 +12,9 @@ use Facades\{
 use App\Http\Resources\UserListResource;
 use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
 {
@@ -22,8 +25,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = UserListResource::collection(User::search()->paginate(10));
+
         return inertia('Users/Index', [
-            "users" => fn () => UserListResource::collection(User::all())
+            "users" => fn () =>  $users
         ]);
     }
 
@@ -34,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        dd('create user');
+        return inertia('Users/Create');
     }
 
     /**
@@ -43,9 +48,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CreateNewUser $newUser)
     {
-        //
+        $newUser->create($request->all());
+        return redirect()->route('users');
     }
 
     /**

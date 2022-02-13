@@ -60,4 +60,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function scopeSearch($query)
+    {
+        !request()->s ?: $query->where('email', 'LIKE', '%' . request()->s . '%')
+            ->orWhere('name', 'LIKE', '%' . request()->s . '%');
+    }
 }

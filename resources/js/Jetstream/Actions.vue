@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed z-50 bottom-5 right-5">
+    <div class="fixed z-50 bottom-16 right-5">
         <jet-button
             @click="open = !open"
             class="!rounded-full !p-3 relative z-50"
