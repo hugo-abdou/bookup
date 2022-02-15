@@ -36,12 +36,12 @@
                                         aria-hidden="true"
                                     >
                                         <div
-                                            class="w-full border-t border-gray-300"
+                                            class="w-full border-t border-gray-300 duration-200 dark:border-gray-500"
                                         />
                                     </div>
                                     <div class="relative flex justify-start">
                                         <span
-                                            class="pr-2 bg-white dark:bg-gray-800 text-sm text-gray-500"
+                                            class="pr-2 bg-white dark:bg-gray-800 duration-200 text-sm text-gray-500"
                                         >
                                             {{ per.name }}
                                         </span>

@@ -8,7 +8,7 @@
                     text: 'Add New Role',
                     theme: { placement: 'left' },
                 }"
-                @click=""
+                v-if="can('create role')"
             >
                 <Link :href="route('roles.create')">
                     <PlusIcon class="w-5 h-5 text-gray-500" />
@@ -31,6 +31,7 @@ import { PlusIcon } from "@heroicons/vue/outline";
 import { Link, usePage } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import Pagination from "@/Jetstream/Pagination.vue";
+import useCan from "@composables/useCan";
 
 export default defineComponent({
     components: {
@@ -43,7 +44,8 @@ export default defineComponent({
         Pagination,
     },
     setup() {
-        return {};
+        const { can } = useCan();
+        return { can };
     },
 });
 </script>

@@ -58,7 +58,8 @@
                                             class="inline-block dark:border-gray-500 hover:text-gray-400 shadow-md border p-1 rounded-md active:shadow-none"
                                             v-if="
                                                 $page.props.user.id !==
-                                                person.id
+                                                    person.id &&
+                                                can('update user')
                                             "
                                             :href="
                                                 route('users.edit', person.id)
@@ -71,7 +72,8 @@
                                             class="inline-block dark:border-gray-500 text-red-400 hover:text-red-300 shadow-md border p-1 rounded-md active:shadow-none"
                                             v-if="
                                                 $page.props.user.id !==
-                                                person.id
+                                                    person.id &&
+                                                can('destroy user')
                                             "
                                             @click="
                                                 () => {
@@ -102,6 +104,7 @@ import DeleteUserModel from "./DeleteUserModel.vue";
 import JetConfirmsPassword from "@/Jetstream/ConfirmsPassword.vue";
 import useDeleteUser from "@composables/useDeleteUser";
 import { ref } from "@vue/reactivity";
+import useCan from "@composables/useCan";
 import { PencilAltIcon, TrashIcon } from "@heroicons/vue/outline";
 
 export default {
@@ -119,7 +122,8 @@ export default {
             // onsuccess
             user.value = null;
         });
-        return { destroy, user };
+        const { can } = useCan();
+        return { destroy, user, can };
     },
 };
 </script>

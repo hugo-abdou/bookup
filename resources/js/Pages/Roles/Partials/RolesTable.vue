@@ -35,12 +35,14 @@
                                 <td>
                                     <div class="space-x-2 flex justify-center">
                                         <Link
+                                            v-if="can('update role')"
                                             class="inline-block dark:border-gray-500 hover:text-gray-400 shadow-md border p-1 rounded-md active:shadow-none"
                                             :href="route('roles.edit', role.id)"
                                         >
                                             <PencilAltIcon class="w-5" />
                                         </Link>
                                         <a
+                                            v-if="can('destroy role')"
                                             href="#"
                                             class="inline-block dark:border-gray-500 text-red-400 hover:text-red-300 shadow-md border p-1 rounded-md active:shadow-none"
                                             @click="deleteRole(role.id)"
@@ -66,6 +68,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 import JetConfirmsPassword from "@/Jetstream/ConfirmsPassword.vue";
 import { ref } from "@vue/reactivity";
 import { PencilAltIcon, TrashIcon } from "@heroicons/vue/outline";
+import useCan from "@composables/useCan";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
@@ -85,7 +88,8 @@ export default {
             role.value = id;
             DeleteUserModel.value.click();
         }
-        return { destroy, deleteRole, DeleteUserModel };
+        const { can } = useCan();
+        return { destroy, deleteRole, DeleteUserModel, can };
     },
 };
 </script>

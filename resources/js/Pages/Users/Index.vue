@@ -8,7 +8,7 @@
                     text: 'Add New User',
                     theme: { placement: 'left' },
                 }"
-                @click=""
+                v-if="can('create user')"
             >
                 <Link :href="route('users.create')">
                     <PlusIcon class="w-5 h-5 text-gray-500" />
@@ -30,6 +30,7 @@ import SecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import { PlusIcon } from "@heroicons/vue/outline";
 import { Link, usePage } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
+import useCan from "@composables/useCan";
 import Pagination from "@/Jetstream/Pagination.vue";
 
 export default defineComponent({
@@ -43,7 +44,8 @@ export default defineComponent({
         Pagination,
     },
     setup() {
-        return {};
+        const { can } = useCan();
+        return { can };
     },
 });
 </script>
