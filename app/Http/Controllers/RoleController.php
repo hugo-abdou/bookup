@@ -9,40 +9,26 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        $this->authorize('show role');
         $roles = RoleResource::collection(Role::paginate(10));
 
         return inertia('Roles/Index', [
             "roles" => fn () =>  $roles
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        $this->authorize('create role');
         return inertia('Roles/Create', [
             'permissions' => Permission::all()
         ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $this->authorize('create role');
         $data = $request->validate([
             'name' => 'required|string|max:255',
             "permissions.*" =>  'integer',
@@ -53,44 +39,18 @@ class RoleController extends Controller
         }
         return redirect()->route('roles.index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Role $role, Request $request)
     {
-
+        $this->authorize('update role');
         $role['selectedPermissions'] =  $role->getAllPermissions()->map(fn ($per) => $per->id);
         return inertia('Roles/Edit', [
             "role" => fn () => $role,
             'permissions' => Permission::all()
         ]);
     }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Role $role)
     {
+        $this->authorize('update role');
         $data = $request->validate([
             'name' => 'required|string|max:255',
             "selectedPermissions.*" =>  'integer',
@@ -104,15 +64,9 @@ class RoleController extends Controller
         }
         return back(303);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, Role $role)
     {
+        $this->authorize('destroy role');
         $this->middleware(['password.confirm']);
         $role->delete();
         return redirect()->route('roles.index');

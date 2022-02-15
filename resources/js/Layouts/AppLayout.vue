@@ -385,7 +385,7 @@
                                     :key="link.name"
                                 >
                                     <jet-nav-link
-                                        v-if="!link.disabled"
+                                        v-if="link.can"
                                         :href="route(link.route)"
                                         :active="route().current(link.route)"
                                     >

@@ -20,6 +20,14 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($user) {
+            $user->assignRole(isset(request()->role) ? request()->role : config("app.default_user_role"));
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *

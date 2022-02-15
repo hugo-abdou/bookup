@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            RolesAndPermissionsSeeder::class
+        ]);
         \App\Models\User::create(
             [
                 'name' => 'abdelghafor',
@@ -24,8 +27,5 @@ class DatabaseSeeder extends Seeder
             ]
         );
         \App\Models\User::factory(10)->create();
-        $this->call([
-            RolesAndPermissionsSeeder::class
-        ]);
     }
 }

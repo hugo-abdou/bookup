@@ -19,7 +19,7 @@ class UserListResource extends JsonResource
             "name" => $this->name,
             "email" => $this->email,
             "profile_photo_url" => $this->profile_photo_url,
-            "role" => 'admin'
+            "role" => $this->getRoleNames()->first()
         ];
     }
 }

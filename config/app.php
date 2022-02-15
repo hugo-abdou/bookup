@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+
+    'default_user_role' => env('DEFAULT_USER_ROLE', 1),
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

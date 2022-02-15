@@ -105,6 +105,18 @@
                         class="mt-2"
                     />
                 </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <jet-label for="role" value="Role" />
+                    <input-select id="role" v-model="form.role">
+                        <option
+                            v-for="role in roles"
+                            :value="role.id"
+                            :key="role.id"
+                        >
+                            {{ role.name }}
+                        </option>
+                    </input-select>
+                </div>
             </template>
 
             <template #actions>
@@ -133,6 +145,7 @@ import JetLabel from "@/Jetstream/Label.vue";
 import JetActionMessage from "@/Jetstream/ActionMessage.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import { Inertia } from "@inertiajs/inertia";
+import InputSelect from "@/Jetstream/InputSelect.vue";
 
 export default defineComponent({
     components: {
@@ -144,9 +157,10 @@ export default defineComponent({
         JetInputError,
         JetLabel,
         JetSecondaryButton,
+        InputSelect,
     },
 
-    props: ["user"],
+    props: ["user", "roles"],
 
     data() {
         return {
@@ -155,6 +169,7 @@ export default defineComponent({
                 email: "",
                 password: "",
                 password_confirmation: "",
+                role: 2,
                 photo: null,
                 terms: true,
             }),
