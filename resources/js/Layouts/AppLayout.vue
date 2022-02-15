@@ -123,9 +123,9 @@
                                                                     .current_team
                                                             )
                                                         "
-                                                        >Team
-                                                        Settings</jet-dropdown-link
                                                     >
+                                                        Team Settings
+                                                    </jet-dropdown-link>
 
                                                     <jet-dropdown-link
                                                         :href="
@@ -138,9 +138,9 @@
                                                                 .jetstream
                                                                 .canCreateTeams
                                                         "
-                                                        >Create New
-                                                        Team</jet-dropdown-link
                                                     >
+                                                        Create New Team
+                                                    </jet-dropdown-link>
 
                                                     <div
                                                         class="border-t border-gray-100"
@@ -218,14 +218,21 @@
                                                 "
                                                 class="text-sm mt-1 border-2 border-transparent focus:outline-none focus:border-transparent transition"
                                             >
-                                                <img
-                                                    class="rounded-full h-10 w-12 object-cover"
-                                                    :src="
-                                                        $page.props.user
-                                                            .profile_photo_url
-                                                    "
-                                                    :alt="$page.props.user.name"
-                                                />
+                                                <div
+                                                    class="flex-shrink-0 h-10 w-10"
+                                                >
+                                                    <img
+                                                        class="h-10 w-10 rounded-full"
+                                                        :src="
+                                                            $page.props.user
+                                                                .profile_photo_url
+                                                        "
+                                                        :alt="
+                                                            $page.props.user
+                                                                .name
+                                                        "
+                                                    />
+                                                </div>
                                             </button>
 
                                             <span
@@ -357,9 +364,9 @@
                                             class="flex items-center space-x-1"
                                         >
                                             <MailIcon class="w-5" />
-                                            <span>{{
-                                                $page.props.user.email
-                                            }}</span>
+                                            <span>
+                                                {{ $page.props.user.email }}
+                                            </span>
                                         </span>
                                     </div>
                                 </Link>
@@ -373,15 +380,22 @@
                             </div>
                             <!-- Meta info -->
                             <div class="space-y-4">
-                                <jet-nav-link
+                                <template
                                     v-for="link in sideBarLinks"
                                     :key="link.name"
-                                    :href="route(link.route)"
-                                    :active="route().current(link.route)"
                                 >
-                                    <component :is="link.icon" class="w-5" />
-                                    <span>{{ link.name }}</span>
-                                </jet-nav-link>
+                                    <jet-nav-link
+                                        v-if="!link.disabled"
+                                        :href="route(link.route)"
+                                        :active="route().current(link.route)"
+                                    >
+                                        <component
+                                            :is="link.icon"
+                                            class="w-5"
+                                        />
+                                        <span>{{ link.name }}</span>
+                                    </jet-nav-link>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -428,7 +442,7 @@ import {
 } from "@heroicons/vue/outline";
 import Button from "../Jetstream/Button.vue";
 import SecondaryButton from "../Jetstream/SecondaryButton.vue";
-import { sideBarLinks, useDarkMode } from "@config";
+import { useLinks, useDarkMode } from "@config";
 import { Inertia } from "@inertiajs/inertia";
 import Search from "./Search.vue";
 export default defineComponent({
@@ -467,6 +481,7 @@ export default defineComponent({
         const showingSideBar = ref(false);
         const classes = ref(false);
         const { isDark, toggleDark } = useDarkMode();
+        const { sideBarLinks } = useLinks();
 
         function switchToTeam(team) {
             Inertia.put(
@@ -485,13 +500,13 @@ export default defineComponent({
         }
 
         return {
+            sideBarLinks,
             toggleDark,
             isDark,
             showingSideBar,
             classes,
             logout,
             switchToTeam,
-            sideBarLinks,
         };
     },
 });

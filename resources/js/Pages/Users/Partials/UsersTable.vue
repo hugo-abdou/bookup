@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="ml-4">
                                             <div
-                                                class="text-sm font-medium text-gray-600 dark:text-white dark:text-white dark:text-white"
+                                                class="text-sm font-medium text-gray-600 dark:text-white"
                                             >
                                                 {{ person.name }}
                                             </div>

@@ -3,7 +3,13 @@
         <users-table />
 
         <actions>
-            <secondary-button @click="">
+            <secondary-button
+                v-tooltip="{
+                    text: 'Add New User',
+                    theme: { placement: 'left' },
+                }"
+                @click=""
+            >
                 <Link :href="route('users.create')">
                     <PlusIcon class="w-5 h-5 text-gray-500" />
                 </Link>

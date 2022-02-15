@@ -15,6 +15,7 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -39,7 +40,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return inertia('Users/Create');
+        return inertia('Users/Create', [
+            'roles' => Role::all()
+        ]);
     }
 
     /**
@@ -51,7 +54,7 @@ class UserController extends Controller
     public function store(Request $request, CreateNewUser $newUser)
     {
         $newUser->create($request->all());
-        return redirect()->route('users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -115,7 +118,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
+        $this->middleware(['password.confirm']);
         DeleteUser::delete($user, $request->all());
-        return redirect()->route('users');
+        return redirect()->route('users.index');
     }
 }
