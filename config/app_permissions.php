@@ -10,4 +10,9 @@ return [
     'update role',
     'show role',
     'destroy role',
+    // roles permissions
+    'create project',
+    'update project',
+    'show project',
+    'destroy project',
 ];

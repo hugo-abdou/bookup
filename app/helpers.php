@@ -14,3 +14,10 @@ if (!function_exists('danger')) {
         request()->session()->flash('flash.bannerStyle', 'danger');
     }
 }
+
+if (!function_exists('user')) {
+    function user()
+    {
+        return auth()->user();
+    }
+}

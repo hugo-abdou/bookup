@@ -74,4 +74,8 @@ class User extends Authenticatable
         !request()->s ?: $query->where('email', 'LIKE', '%' . request()->s . '%')
             ->orWhere('name', 'LIKE', '%' . request()->s . '%');
     }
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

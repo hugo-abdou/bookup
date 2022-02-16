@@ -372,9 +372,10 @@
                                 </Link>
                                 <!-- Action buttons -->
                                 <div class="flex flex-col">
-                                    <Button type="button">New Project</Button>
-                                    <secondary-button type="button" class="mt-2"
-                                        >Invite Team</secondary-button
+                                    <Button type="button">
+                                        <Link :href="route('reset')"
+                                            >New Project</Link
+                                        ></Button
                                     >
                                 </div>
                             </div>
@@ -387,7 +388,11 @@
                                     <jet-nav-link
                                         v-if="link.can"
                                         :href="route(link.route)"
-                                        :active="route().current(link.route)"
+                                        :active="
+                                            route().current(
+                                                link.route.split('.')[0] + '.*'
+                                            )
+                                        "
                                     >
                                         <component
                                             :is="link.icon"

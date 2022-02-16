@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,11 +26,26 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/reset', function () {
+    try {
+        Artisan::call('migrate:fresh --seed');
+    } catch (\Throwable $th) {
+        throw $th;
+    }
+    return redirect('/login');
+})->name('reset');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
+
     // users routes
     Route::resource('users', UserController::class);
+
     // roles routes
     Route::resource('roles', RoleController::class);
+
+    // projects routes
+    Route::resource('projects', ProjectController::class);
 });
