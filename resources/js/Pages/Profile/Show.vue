@@ -2,24 +2,19 @@
     <app-layout title="Settings">
         <TabGroup>
             <TabList
-                class="px-2 sm:px-0 grid gap-1 grid-cols-3 sm:grid-cols-5 divide-x divide-gray-200"
+                class="grid grid-cols-3 gap-1 px-2 divide-x divide-gray-200 sm:px-0 sm:grid-cols-5"
             >
-                <Tab
-                    v-for="tag in tags"
-                    :key="tag"
-                    as="template"
-                    v-slot="{ selected }"
-                >
+                <Tab v-for="tag in tags" :key="tag" as="template" v-slot="{ selected }">
                     <a
                         href="#"
-                        class="font-semibold shadow rounded-lg group relative min-w-0 overflow-hidden bg-white dark:bg-gray-700 py-4 px-2 text-sm md:text-base text-center hover:bg-gray-50 focus:z-10 inline-block"
+                        class="relative inline-block min-w-0 px-2 py-4 overflow-hidden text-sm font-semibold text-center rounded-lg shadow group md:text-base hover:bg-gray-50 bg-lv-3 focus:z-10"
                         aria-current="page"
                     >
                         <span
                             :class="
                                 selected
                                     ? 'text-teal-500'
-                                    : 'text-gray-500 dark:text-gray-200'
+                                    : 'text-gray-500 dark:text-gray-100 dark:group-hover:text-gray-500'
                             "
                             >{{ tag }}</span
                         >
@@ -32,15 +27,9 @@
                 </Tab>
             </TabList>
             <TabPanels class="mt-2">
-                <TabPanel
-                    v-if="$page.props.jetstream.canUpdateProfileInformation"
-                >
-                    <div
-                        v-if="$page.props.jetstream.canUpdateProfileInformation"
-                    >
-                        <update-profile-information-form
-                            :user="$page.props.user"
-                        />
+                <TabPanel v-if="$page.props.jetstream.canUpdateProfileInformation">
+                    <div v-if="$page.props.jetstream.canUpdateProfileInformation">
+                        <update-profile-information-form :user="$page.props.user" />
 
                         <jet-section-border />
                     </div>
@@ -51,12 +40,7 @@
                         <jet-section-border />
                     </div>
 
-                    <div
-                        v-if="
-                            $page.props.jetstream
-                                .canManageTwoFactorAuthentication
-                        "
-                    >
+                    <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
                         <two-factor-authentication-form class="mt-10 sm:mt-0" />
 
                         <jet-section-border />
@@ -67,9 +51,7 @@
                         class="mt-10 sm:mt-0"
                     />
 
-                    <template
-                        v-if="$page.props.jetstream.hasAccountDeletionFeatures"
-                    >
+                    <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
                         <jet-section-border />
 
                         <delete-user-form class="mt-10 sm:mt-0" />
@@ -77,11 +59,9 @@
                 </TabPanel>
                 <TabPanel>
                     <div
-                        class="w-full h-96 bg-white dark:bg-gray-800 rounded-md shadow-md duration-300"
+                        class="w-full bg-white rounded-md shadow-md h-96 bg-lv-2"
                     >
-                        <h2 class="text-3xl p-5 text-gray-400">
-                            New Tab Section
-                        </h2>
+                        <h2 class="p-5 text-3xl text-gray-400">New Tab Section</h2>
                     </div>
                 </TabPanel>
             </TabPanels>

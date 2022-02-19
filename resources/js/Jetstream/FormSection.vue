@@ -1,13 +1,8 @@
 <template>
-    <div class="mt-5 md:mt-0">
+    <div class="mt-5 overflow-hidden duration-200 border shadow md:mt-0 sm:rounded-md dark:border-gray-700">
         <form @submit.prevent="$emit('submitted')">
             <div
-                class="px-4 py-5 bg-white dark:bg-gray-800 duration-200 sm:p-6 shadow space-y-5"
-                :class="
-                    hasActions
-                        ? 'sm:rounded-tl-md sm:rounded-tr-md'
-                        : 'sm:rounded-md'
-                "
+                class="px-4 py-5 space-y-5 bg-lv-2 sm:p-6"
             >
                 <jet-section-title>
                     <template #title>
@@ -23,7 +18,7 @@
             </div>
 
             <div
-                class="flex items-center justify-end px-4 py-3 bg-gray-50 duration-200 dark:bg-gray-700 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md"
+                class="flex items-center justify-end px-4 py-3 text-right bg-lv-3 sm:px-6"
                 v-if="hasActions"
             >
                 <slot name="actions"></slot>

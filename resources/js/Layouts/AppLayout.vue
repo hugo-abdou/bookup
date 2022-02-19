@@ -5,24 +5,20 @@
         <jet-banner />
 
         <div
-            :class="[
-                'duration-300 lg:pl-64 h-screen relative overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400',
-                !showingSideBar ? '' : '',
-                isDark ? 'bg-gray-900 ' : 'bg-gray-100 ',
-            ]"
+            class="relative h-screen overflow-auto lg:pl-64 bg-lv-1 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400"
         >
             <!-- navbar -->
             <nav ref="navbar" class="fixed inset-x-0 z-50">
                 <!-- Primary Navigation Menu -->
-                <div class="bg-gradient-primary shadow">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between items-center h-16">
+                <div class="shadow bg-gradient-primary">
+                    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between h-16">
                             <div class="flex justify-between w-full">
                                 <!-- Logo -->
-                                <div class="shrink-0 flex items-center">
+                                <div class="flex items-center shrink-0">
                                     <Link :href="route('home')">
                                         <jet-application-mark
-                                            class="block h-9 w-auto"
+                                            class="block w-auto h-9"
                                         />
                                     </Link>
                                 </div>
@@ -36,20 +32,20 @@
                                         @click="
                                             showingSideBar = !showingSideBar
                                         "
-                                        class="inline-flex items-center justify-center text-white hover:text-gray-300 focus:outline-none transition lg:hidden"
+                                        class="inline-flex items-center justify-center text-white transition hover:text-gray-300 focus:outline-none lg:hidden"
                                     >
                                         <MenuAlt2Icon
                                             v-if="!showingSideBar"
-                                            class="h-6 w-6"
+                                            class="w-6 h-6"
                                         />
                                         <XIcon
                                             v-if="showingSideBar"
-                                            class="h-6 w-6"
+                                            class="w-6 h-6"
                                         />
                                     </button>
                                     <button
                                         @click="toggleDark"
-                                        class="inline-flex items-center justify-center text-white hover:text-gray-300 focus:outline-none transition"
+                                        class="inline-flex items-center justify-center text-white transition hover:text-gray-300 focus:outline-none"
                                     >
                                         <MoonIcon v-if="isDark" class="w-6" />
                                         <SunIcon v-else class="w-6" />
@@ -77,7 +73,7 @@
                                             >
                                                 <button
                                                     type="button"
-                                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition"
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
                                                 >
                                                     {{
                                                         $page.props.user
@@ -180,7 +176,7 @@
                                                                                 .user
                                                                                 .current_team_id
                                                                         "
-                                                                        class="mr-2 h-5 w-5 text-green-400"
+                                                                        class="w-5 h-5 mr-2 text-green-400"
                                                                         fill="none"
                                                                         stroke-linecap="round"
                                                                         stroke-linejoin="round"
@@ -208,7 +204,7 @@
                                 </div>
 
                                 <!-- Settings Dropdown -->
-                                <div class="ml-2 relative">
+                                <div class="relative ml-2">
                                     <jet-dropdown align="right" width="48">
                                         <template #trigger>
                                             <button
@@ -216,13 +212,13 @@
                                                     $page.props.jetstream
                                                         .managesProfilePhotos
                                                 "
-                                                class="text-sm mt-1 border-2 border-transparent focus:outline-none focus:border-transparent transition"
+                                                class="mt-1 text-sm transition border-2 border-transparent focus:outline-none focus:border-transparent"
                                             >
                                                 <div
-                                                    class="flex-shrink-0 h-10 w-10"
+                                                    class="flex-shrink-0 w-10 h-10"
                                                 >
                                                     <img
-                                                        class="h-10 w-10 rounded-full"
+                                                        class="w-10 h-10 rounded-full"
                                                         :src="
                                                             $page.props.user
                                                                 .profile_photo_url
@@ -241,7 +237,7 @@
                                             >
                                                 <button
                                                     type="button"
-                                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                                 >
                                                     {{ $page.props.user.name }}
                                                     <svg
@@ -273,7 +269,7 @@
                                             >
                                                 <span class="flex">
                                                     <CogIcon
-                                                        class="w-5 text-gray-500 mr-2"
+                                                        class="w-5 mr-2 text-gray-500"
                                                     />Settings
                                                 </span>
                                             </jet-dropdown-link>
@@ -298,7 +294,7 @@
                                                 <jet-dropdown-link as="button">
                                                     <span class="flex">
                                                         <LogoutIcon
-                                                            class="w-5 text-gray-500 mr-2"
+                                                            class="w-5 mr-2 text-gray-500"
                                                         />Log Out
                                                     </span>
                                                 </jet-dropdown-link>
@@ -314,14 +310,11 @@
             <!-- Side bar -->
             <div
                 :class="[
-                    'fixed inset-y-0 left-0 z-[49] w-64 pt-16 transform duration-300 border-r lg:-translate-x-0',
+                    'fixed inset-y-0 left-0 z-[49] w-64 pt-16 bg-lv-2 border-r dark:border-gray-600 transform lg:-translate-x-0',
                     !showingSideBar ? '-translate-x-64' : '',
-                    isDark
-                        ? 'bg-gray-800 border-gray-700'
-                        : 'bg-white border-gray-200 ',
                 ]"
             >
-                <div class="py-5 px-4">
+                <div class="px-4 py-5">
                     <div class="flex items-center justify-between">
                         <div class="flex-1 space-y-8">
                             <div class="space-y-8">
@@ -335,10 +328,10 @@
                                             $page.props.jetstream
                                                 .managesProfilePhotos
                                         "
-                                        class="flex-shrink-0 h-12 w-12"
+                                        class="flex-shrink-0 w-12 h-12"
                                     >
                                         <img
-                                            class="h-12 w-12 rounded-full"
+                                            class="w-12 h-12 rounded-full"
                                             :src="
                                                 $page.props.user
                                                     .profile_photo_url
@@ -347,10 +340,10 @@
                                         />
                                     </div>
                                     <div
-                                        class="space-y-1 text-xs text-gray-400 font-medium"
+                                        class="space-y-1 text-xs font-medium text-gray-400"
                                     >
                                         <div
-                                            class="text-sm font-medium text-gray-900 dark:text-white"
+                                            class="text-sm font-medium text-lv-1"
                                         >
                                             {{ $page.props.user.name }}
                                         </div>
@@ -408,9 +401,9 @@
             </div>
             <!-- Page Content -->
             <main
-                class="relative max-w-7xl min-h-screen mx-auto py-20 sm:px-2 lg:px-8"
+                class="relative min-h-screen py-20 mx-auto max-w-7xl sm:px-2 lg:px-8"
             >
-                <h1 class="text-2xl font-bold text-gray-600 mb-5">
+                <h1 class="mb-5 text-2xl font-bold text-gray-600">
                     {{ title }}
                 </h1>
                 <slot></slot>

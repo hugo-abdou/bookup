@@ -6,15 +6,15 @@
 
         <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
             <template #title>
-                <h4 class="dark:text-white">{{ title }}</h4>
+                <h4 class="text-lv-2">{{ title }}</h4>
             </template>
 
             <template #content>
-                <h4 class="dark:text-white">{{ content }}</h4>
+                <h4 class="text-lv-2">{{ content }}</h4>
                 <div class="mt-4">
                     <jet-input
                         type="password"
-                        class="mt-1 block w-3/4"
+                        class="block w-3/4 mt-1"
                         placeholder="Password"
                         ref="password"
                         v-model="form.password"

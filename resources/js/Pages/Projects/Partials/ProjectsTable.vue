@@ -2,15 +2,16 @@
     <div class="flex flex-col">
         <div class="-my-2 sm:-mx-6 lg:-mx-8">
             <div
-                class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
             >
-                <div class="shadow overflow-hidden sm:rounded-lg">
+                <div class="overflow-hidden shadow sm:rounded-lg">
                     <table class="min-w-full">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Permissions</th>
+                                <th scope="col">Domain</th>
+                                <th scope="col">Description</th>
                                 <th scope="col" class="sr-only">Edit</th>
                             </tr>
                         </thead>
@@ -18,25 +19,17 @@
                             <tr
                                 v-for="project in $page.props.projects.data"
                                 :key="project.id"
+
                             >
                                 <td>{{ project.id }}</td>
                                 <td>{{ project.name }}</td>
+                                <td>{{ project.domain_name }}</td>
+                                <td>{{ project.description }}</td>
                                 <td>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span
-                                            v-for="per in project.permissions"
-                                            :key="per"
-                                            class="px-2 capitalize inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-700"
-                                            >{{ per }}</span
-                                        >
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="space-x-2 flex justify-center">
+                                    <div class="flex justify-center space-x-2">
                                         <Link
                                             v-if="can('update project')"
-                                            class="inline-block dark:border-gray-500 hover:text-gray-400 shadow-md border p-1 rounded-md active:shadow-none"
+                                            class="inline-block p-1 border rounded-md shadow-md dark:border-gray-500 hover:text-gray-400 active:shadow-none"
                                             :href="
                                                 route(
                                                     'projects.edit',
@@ -49,7 +42,7 @@
                                         <a
                                             v-if="can('destroy project')"
                                             href="#"
-                                            class="inline-block dark:border-gray-500 text-red-400 hover:text-red-300 shadow-md border p-1 rounded-md active:shadow-none"
+                                            class="inline-block p-1 text-red-400 border rounded-md shadow-md dark:border-gray-500 hover:text-red-300 active:shadow-none"
                                             @click="deleteProject(project.id)"
                                         >
                                             <TrashIcon class="w-5" />

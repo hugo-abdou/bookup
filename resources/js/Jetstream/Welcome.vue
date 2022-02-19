@@ -1,10 +1,10 @@
 <template>
     <div>
         <div
-            class="p-6 sm:px-20 bg-white dark:bg-gray-800 border-b border-gray-200"
+            class="p-6 border-b border-gray-200 sm:px-20 bg-lv-2"
         >
             <div>
-                <jet-application-logo class="block h-12 w-auto" />
+                <jet-application-logo class="block w-auto h-12" />
             </div>
 
             <div class="mt-8 text-2xl">
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
+        <div class="grid grid-cols-1 bg-gray-200 bg-opacity-25 md:grid-cols-2">
             <div class="p-6">
                 <div class="flex items-center">
                     <svg
@@ -39,7 +39,7 @@
                         />
                     </svg>
                     <div
-                        class="ml-4 text-lg text-gray-600 dark:text-gray-200 leading-7 font-semibold"
+                        class="ml-4 text-lg font-semibold leading-7 text-lv-3"
                     >
                         <a href="https://laravel.com/docs">Documentation</a>
                     </div>
@@ -55,7 +55,7 @@
 
                     <a href="https://laravel.com/docs">
                         <div
-                            class="mt-3 flex items-center text-sm font-semibold text-teal-700"
+                            class="flex items-center mt-3 text-sm font-semibold text-teal-700"
                         >
                             <div>Explore the documentation</div>
 
@@ -94,7 +94,7 @@
                         <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <div
-                        class="ml-4 text-lg text-gray-600 dark:text-gray-200 leading-7 font-semibold"
+                        class="ml-4 text-lg font-semibold leading-7 text-lv-3"
                     >
                         <a href="https://laracasts.com">Laracasts</a>
                     </div>
@@ -110,7 +110,7 @@
 
                     <a href="https://laracasts.com">
                         <div
-                            class="mt-3 flex items-center text-sm font-semibold text-teal-700"
+                            class="flex items-center mt-3 text-sm font-semibold text-teal-700"
                         >
                             <div>Start watching Laracasts</div>
 
@@ -148,7 +148,7 @@
                         />
                     </svg>
                     <div
-                        class="ml-4 text-lg text-gray-600 dark:text-gray-200 leading-7 font-semibold"
+                        class="ml-4 text-lg font-semibold leading-7 text-lv-3"
                     >
                         <a href="https://tailwindcss.com/">Tailwind</a>
                     </div>
@@ -181,7 +181,7 @@
                         />
                     </svg>
                     <div
-                        class="ml-4 text-lg text-gray-600 dark:text-gray-200 leading-7 font-semibold"
+                        class="ml-4 text-lg font-semibold leading-7 text-lv-3"
                     >
                         Authentication
                     </div>

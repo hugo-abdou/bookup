@@ -1,0 +1,22 @@
+
+@layer utilities {
+
+.bg-lv-1 {
+    @apply dark:bg-gray-900 bg-gray-100 duration-200
+}
+.bg-lv-2 {
+    @apply dark:bg-gray-800 bg-white duration-200
+}
+.bg-lv-3 {
+    @apply dark:bg-gray-700 bg-white duration-200
+}
+.text-lv-1 {
+    @apply text-gray-900 dark:text-gray-100 duration-200
+}
+.text-lv-2 {
+    @apply text-gray-700 dark:text-gray-100 duration-200
+}
+.text-lv-3 {
+    @apply text-gray-600 dark:text-gray-100 duration-200
+}
+}

@@ -2,9 +2,9 @@
     <div class="flex flex-col">
         <div class="-my-2 sm:-mx-6 lg:-mx-8">
             <div
-                class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
             >
-                <div class="shadow overflow-hidden sm:rounded-lg">
+                <div class="overflow-hidden shadow sm:rounded-lg">
                     <table class="min-w-full">
                         <thead>
                             <tr>
@@ -23,16 +23,16 @@
                                 <td>{{ person.id }}</td>
                                 <td>
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10">
+                                        <div class="flex-shrink-0 w-10 h-10">
                                             <img
-                                                class="h-10 w-10 rounded-full"
+                                                class="w-10 h-10 rounded-full"
                                                 :src="person.profile_photo_url"
                                                 alt
                                             />
                                         </div>
                                         <div class="ml-4">
                                             <div
-                                                class="text-sm font-medium text-gray-600 dark:text-white"
+                                                class="text-sm font-medium text-lv-3"
                                             >
                                                 {{ person.name }}
                                             </div>
@@ -47,15 +47,15 @@
 
                                 <td>
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
                                         >Active</span
                                     >
                                 </td>
                                 <td>{{ person.role }}</td>
                                 <td>
-                                    <div class="space-x-2 flex justify-center">
+                                    <div class="flex justify-center space-x-2">
                                         <Link
-                                            class="inline-block dark:border-gray-500 hover:text-gray-400 shadow-md border p-1 rounded-md active:shadow-none"
+                                            class="inline-block p-1 border rounded-md shadow-md dark:border-gray-500 hover:text-gray-400 active:shadow-none"
                                             v-if="
                                                 $page.props.user.id !==
                                                     person.id &&
@@ -69,7 +69,7 @@
                                         </Link>
                                         <a
                                             href="#"
-                                            class="inline-block dark:border-gray-500 text-red-400 hover:text-red-300 shadow-md border p-1 rounded-md active:shadow-none"
+                                            class="inline-block p-1 text-red-400 border rounded-md shadow-md dark:border-gray-500 hover:text-red-300 active:shadow-none"
                                             v-if="
                                                 $page.props.user.id !==
                                                     person.id &&

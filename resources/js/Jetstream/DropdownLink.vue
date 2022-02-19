@@ -2,23 +2,23 @@
     <div>
         <button
             type="submit"
-            class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 dark:text-gray-200 text-left hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 transition"
-            v-if="as == 'button'"
+            :class="clases+' w-full'"
+            v-if="$props.as == 'button'"
         >
             <slot></slot>
         </button>
 
         <a
             :href="href"
-            class="block px-4 py-2 text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 transition"
-            v-else-if="as == 'a'"
+             :class="clases"
+            v-else-if="$props.as == 'a'"
         >
             <slot></slot>
         </a>
 
         <Link
             :href="href"
-            class="block px-4 py-2 text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 transition"
+             :class="clases"
             v-else
         >
             <slot></slot>
@@ -35,5 +35,10 @@ export default defineComponent({
         Link,
     },
     props: ["href", "as"],
+    data(){
+        return{
+            clases:'block px-4 py-2 text-sm leading-5 transition text-lv-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100'
+        }
+    },
 });
 </script>

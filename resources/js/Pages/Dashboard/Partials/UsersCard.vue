@@ -1,18 +1,18 @@
 <template>
     <div
-        class="bg-white dark:bg-gray-700 text-gray-600 dark:text-white duration-200 overflow-hidden shadow rounded-lg"
+        class="overflow-hidden rounded-lg shadow text-lv-3 bg-lv-3"
     >
         <div class="p-5">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <UserGroupIcon class="h-6 w-6" aria-hidden="true" />
+                    <UserGroupIcon class="w-6 h-6" aria-hidden="true" />
                 </div>
-                <div class="ml-5 w-0 flex-1">
+                <div class="flex-1 w-0 ml-5">
                     <dl>
                         <dt class="font-semibold truncate">Users</dt>
                         <dd>
                             <div
-                                class="text-lg font-semibold text-gray-900 dark:text-gray-300 duration-200"
+                                class="text-lg font-semibold text-lv-1"
                             >
                                 {{ $page.props.users }}
                             </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-800 duration-200 px-5 py-3">
+        <div class="px-5 py-3 bg-lv-2">
             <div class="text-sm">
                 <Link
                     :href="route('users.index')"

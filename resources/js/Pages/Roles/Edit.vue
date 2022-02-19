@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="relative flex justify-start">
                                         <span
-                                            class="pr-2 bg-white dark:bg-gray-800 text-sm text-gray-500"
+                                            class="pr-2 bg-lv-2 text-sm text-gray-500"
                                         >
                                             {{ per.name }}
                                         </span>

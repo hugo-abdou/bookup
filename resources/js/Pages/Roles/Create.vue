@@ -14,7 +14,7 @@
                     <jet-input
                         id="name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         v-model="form.name"
                         autocomplete="name"
                         :error="form.errors.name"
@@ -22,7 +22,7 @@
                     <jet-input-error :message="form.errors.name" class="mt-2" />
                 </div>
                 <div
-                    class="col-span-6 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                    class="grid grid-cols-1 col-span-6 gap-4 md:grid-cols-2 lg:grid-cols-3"
                 >
                     <template v-for="per in permissions">
                         <div class="flex items-center justify-between">
@@ -36,12 +36,12 @@
                                         aria-hidden="true"
                                     >
                                         <div
-                                            class="w-full border-t border-gray-300 duration-200 dark:border-gray-500"
+                                            class="w-full border-t border-gray-300 dark:border-gray-500"
                                         />
                                     </div>
                                     <div class="relative flex justify-start">
                                         <span
-                                            class="pr-2 bg-white dark:bg-gray-800 duration-200 text-sm text-gray-500"
+                                            class="pr-2 text-sm text-gray-500 bg-lv-2"
                                         >
                                             {{ per.name }}
                                         </span>
@@ -53,7 +53,7 @@
                                 :value="per.id"
                                 v-model="form.permissions"
                                 :id="per.id + '-permission'"
-                                class="rounded border-gray-300 text-teal-600 shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50"
+                                class="text-teal-600 border-gray-300 rounded shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50"
                             />
                         </div>
                     </template>

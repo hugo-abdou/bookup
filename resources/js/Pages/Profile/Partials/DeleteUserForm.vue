@@ -5,7 +5,7 @@
         <template #description> Permanently delete your account. </template>
 
         <template #content>
-            <div class="max-w-xl text-sm text-gray-600 dark:text-gray-200">
+            <div class="max-w-xl text-sm text-lv-3">
                 Once your account is deleted, all of its resources and data will
                 be permanently deleted. Before deleting your account, please
                 download any data or information that you wish to retain.
@@ -33,7 +33,7 @@
                     <div class="mt-4">
                         <jet-input
                             type="password"
-                            class="mt-1 block w-3/4"
+                            class="block w-3/4 mt-1"
                             placeholder="Password"
                             ref="password"
                             v-model="form.password"

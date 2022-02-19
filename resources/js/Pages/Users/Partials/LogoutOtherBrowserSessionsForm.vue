@@ -9,7 +9,7 @@
         </template>
 
         <template #content>
-            <div class="max-w-xl text-sm text-gray-600 dark:text-white">
+            <div class="max-w-xl text-sm text-lv-3">
                 If necessary, you may log out all of
                 <b>{{ user.name }}</b> other browser sessions across all of this
                 <b>{{ user.name }}</b> devices. Some of
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="ml-3">
-                        <div class="text-sm text-gray-600 dark:text-white">
+                        <div class="text-sm text-lv-3">
                             {{
                                 session.agent.platform
                                     ? session.agent.platform
@@ -78,7 +78,7 @@
                             <div class="text-xs text-gray-500">
                                 {{ session.ip_address }},
                                 <span
-                                    class="text-green-500 font-semibold"
+                                    class="font-semibold text-green-500"
                                     v-if="session.is_current_device"
                                     >This device</span
                                 >
@@ -113,7 +113,7 @@
                     <div class="mt-4">
                         <jet-input
                             type="password"
-                            class="mt-1 block w-3/4"
+                            class="block w-3/4 mt-1"
                             placeholder="Password"
                             ref="password"
                             v-model="form.password"

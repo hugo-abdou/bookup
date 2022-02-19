@@ -26,9 +26,9 @@ export default defineComponent({
 
     computed: {
         classes() {
-            return this.active
-                ? "block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition border-teal-400 text-teal-500 focus:text-teal-800 focus:bg-teal-100 focus:border-teal-700"
-                : "block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition border-transparent text-gray-600 dark:text-gray-200 hover:text-gray-800 hover:bg-gray-50 dark:bg-gray-700 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 dark:bg-gray-700 focus:border-gray-300";
+            return 'block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition '+ this.active
+                ? "border-teal-400 text-teal-500 focus:text-teal-800 focus:bg-teal-100 focus:border-teal-700"
+                : "border-transparent text-lv-3 hover:focus:text-gray-800 hover:focus:bg-gray-50 bg-lv-3 hover:focus:border-gray-300";
         },
     },
 });

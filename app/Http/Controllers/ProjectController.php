@@ -29,10 +29,18 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create project');
+
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'domain_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
         ]);
-        user()->projects()->create(['name' => $data['name']]);
+        user()->projects()->create([
+            'name' => $data['name'],
+            'domain_name' => $data['domain_name'],
+            'description' => $data['description'],
+        ]);
+
         return redirect()->route('projects.index');
     }
     public function edit(Project $project, Request $request)

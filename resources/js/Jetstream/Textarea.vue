@@ -1,16 +1,18 @@
 <template>
-    <select
+    <textarea
         :class="[
-            'border-gray-300 focus:border-teal-300 w-full focus:ring-0 rounded-md shadow-sm dark:text-gray-300 bg-lv-3 bg-opacity-10',
-            error && '!border-red-600 !bg-red-600/20 ',
+            'border-gray-300 focus:border-teal-300 focus:ring-0 rounded-md shadow-sm dark:text-gray-300 bg-white bg-opacity-10',
+            error && '!border-red-600 !bg-red-600/20',
         ]"
         :value="modelValue"
+        placeholder="...."
         @input="$emit('update:modelValue', $event.target.value)"
         ref="input"
     >
-        <slot />
-    </select>
+        <slot/>
+    </textarea>
 </template>
+
 <script>
 import { defineComponent } from "vue";
 

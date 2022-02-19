@@ -6,17 +6,17 @@
         @close="close"
     >
         <div class="px-6 py-4">
-            <div class="text-lg dark:text-gray-50">
+            <div class="text-lg text-lv-1">
                 <slot name="title"> </slot>
             </div>
 
-            <div class="mt-4 dark:text-gray-200">
+            <div class="mt-4 text-lv-2">
                 <slot name="content"> </slot>
             </div>
         </div>
 
         <div
-            class="flex flex-row justify-end px-6 py-4 bg-gray-100 dark:bg-gray-700 text-right"
+            class="flex flex-row justify-end px-6 py-4 text-right bg-lv-3"
         >
             <slot name="footer"> </slot>
         </div>
