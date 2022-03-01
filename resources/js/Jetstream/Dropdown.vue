@@ -5,11 +5,7 @@
         </div>
 
         <!-- Full Screen Dropdown Overlay -->
-        <div
-            v-show="open"
-            class="fixed inset-0 z-40"
-            @click="open = false"
-        ></div>
+        <div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
 
         <transition
             enter-active-class="transition duration-200 ease-out"
@@ -63,9 +59,7 @@ export default defineComponent({
         };
 
         onMounted(() => document.addEventListener("keydown", closeOnEscape));
-        onUnmounted(() =>
-            document.removeEventListener("keydown", closeOnEscape)
-        );
+        onUnmounted(() => document.removeEventListener("keydown", closeOnEscape));
 
         return {
             open,
@@ -84,6 +78,8 @@ export default defineComponent({
                 return "origin-top-left left-0";
             } else if (this.align === "right") {
                 return "origin-top-right right-0";
+            } else if (this.align === "right-bottom") {
+                return "origin-top-right right-10 bottom-0";
             } else {
                 return "origin-top";
             }

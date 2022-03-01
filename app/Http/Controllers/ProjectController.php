@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProjectResource;
-use App\Http\Resources\RoleResource;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class ProjectController extends Controller
 {
@@ -18,7 +15,7 @@ class ProjectController extends Controller
         $projects = ProjectResource::collection(Project::paginate(10));
 
         return inertia('Projects/Index', [
-            "projects" => fn () =>  $projects
+            "projects" => fn() => $projects,
         ]);
     }
     public function create()
@@ -48,7 +45,7 @@ class ProjectController extends Controller
         $this->authorize('update project');
 
         return inertia('Projects/Edit', [
-            "project" => fn () => $project,
+            "project" => fn() => $project,
         ]);
     }
     public function update(Request $request, Project $project)
@@ -56,8 +53,14 @@ class ProjectController extends Controller
         $this->authorize('update project');
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'domain_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
         ]);
-        $project->update(['name' => $data['name']]);
+        $project->update([
+            'name' => $data['name'],
+            'domain_name' => $data['domain_name'],
+            'description' => $data['description'],
+        ]);
         return back(303);
     }
     public function destroy(Request $request, Project $project)

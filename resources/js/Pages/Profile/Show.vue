@@ -2,12 +2,12 @@
     <app-layout title="Settings">
         <TabGroup>
             <TabList
-                class="grid grid-cols-3 gap-1 px-2 divide-x divide-gray-200 sm:px-0 sm:grid-cols-5"
+                class="grid grid-cols-3 gap-1 px-2 sm:px-0 sm:grid-cols-5"
             >
                 <Tab v-for="tag in tags" :key="tag" as="template" v-slot="{ selected }">
                     <a
                         href="#"
-                        class="relative inline-block min-w-0 px-2 py-4 overflow-hidden text-sm font-semibold text-center rounded-lg shadow group md:text-base hover:bg-gray-50 bg-lv-3 focus:z-10"
+                        class="relative inline-block min-w-0 px-2 py-4 overflow-hidden text-sm font-semibold text-center rounded-lg shadow group md:text-base hover:bg-gray-50 bg-lv-2 focus:z-10"
                         aria-current="page"
                     >
                         <span

@@ -26,6 +26,10 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/builder', function () {
+    return inertia('Builder');
+});
+
 Route::get('/reset', function () {
     try {
         Artisan::call('migrate:fresh --seed');
@@ -37,8 +41,6 @@ Route::get('/reset', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
 
     // users routes
     Route::resource('users', UserController::class);

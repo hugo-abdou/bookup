@@ -1,15 +1,12 @@
 <template>
     <div class="fixed z-50 bottom-16 right-5">
-        <jet-button
-            @click="open = !open"
-            class="!rounded-full !p-3 relative z-50"
-        >
+        <jet-button @click="open = !open" class="!rounded-full !p-3 relative z-50">
             <PlusIcon v-if="open" class="w-5 h-5 duration-200 rotate-45" />
             <DotsHorizontalIcon v-else class="w-5 h-5 duration-200" />
         </jet-button>
 
         <div
-            class="duration-300 transform absolute top-0 ml-1"
+            class="absolute top-0 ml-1 duration-300 transform"
             :style="{
                 '--tw-translate-y': open ? `-${47 * (i + 1)}px` : '0',
             }"

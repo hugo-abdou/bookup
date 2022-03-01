@@ -32,6 +32,8 @@
         "@headlessui/vue": "^1.4.3",
         "@heroicons/vue": "^1.0.5",
         "@vue/runtime-core": "^3.2.31",
-        "@vueuse/core": "^7.6.2"
+        "@vueuse/core": "^7.6.2",
+        "grapesjs": "^0.18.3",
+        "postcss-loader": "^6.2.1"
     }
 }

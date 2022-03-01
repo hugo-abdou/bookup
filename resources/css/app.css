@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "./table";
+@import "./table.css";
 @import "./layout.css";
 
 @layer utilities {
