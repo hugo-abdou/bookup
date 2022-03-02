@@ -19,9 +19,10 @@ export const devices = [
 export const deviceButtons = [
     {
         id: "device-sm",
+        active: false,
         label: `<img src="/assets/mobile.svg"></img>`,
         command: (editor) => editor.setDevice("sm"),
-        togglable: true,
+        togglable: false,
     },
     {
         id: "device-md",

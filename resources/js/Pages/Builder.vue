@@ -25,6 +25,14 @@
                 <div ref="layers"></div>
             </template>
         </BuilderSidebarAction>
+        <BuilderSidebarAction buttonClass="right-24" sidebarClass="-right-20 p-0">
+            <template #button>
+                <PencilIcon class="w-5 h-5 rotate-90" />
+            </template>
+            <template #sidebar>
+                <div ref="traits"></div>
+            </template>
+        </BuilderSidebarAction>
     </div>
 </template>
 <script>
@@ -35,17 +43,30 @@ import Button from "@/Jetstream/Button.vue";
 import SecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import JetDropdown from "@/Jetstream/Dropdown.vue";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
-import { TemplateIcon, ViewBoardsIcon } from "@heroicons/vue/outline";
+import { TemplateIcon, ViewBoardsIcon,PencilIcon } from "@heroicons/vue/outline";
 import BuilderSidebarAction from "../Jetstream/BuilderSidebarAction.vue";
 const scrollClasses =
     "scrollbar-thumb-gray-300 scrollbar-track-gray-50 scrollbar-thin scrollbar-thumb-rounded-full";
+
 export default {
+     components: {
+        Actions,
+        Button,
+        TemplateIcon,
+        JetDropdown,
+        Popover,
+        PopoverButton,
+        PopoverPanel,
+        ViewBoardsIcon,
+        BuilderSidebarAction,PencilIcon
+    },
     setup(props) {
         const gjs = ref(null);
         const blocks = ref(null);
         const layerManager = ref(null);
         const panels = ref(null);
         const layers = ref(null);
+        const traits = ref(null)
 
         onMounted(() => {
             const { editor } = useEditor({
@@ -54,6 +75,7 @@ export default {
                 layerManager: layerManager.value,
                 panels: panels.value,
                 layers: layers.value,
+                traits: traits.value
             });
         });
         return {
@@ -64,20 +86,10 @@ export default {
             scrollClasses,
             layers,
             Button,
-            SecondaryButton,
+            SecondaryButton,traits
         };
     },
-    components: {
-        Actions,
-        Button,
-        TemplateIcon,
-        JetDropdown,
-        Popover,
-        PopoverButton,
-        PopoverPanel,
-        ViewBoardsIcon,
-        BuilderSidebarAction,
-    },
+
 };
 </script>
 <style>

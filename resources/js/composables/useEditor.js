@@ -1,6 +1,7 @@
 import grapesjs from "grapesjs";
-import { deviceButtons, devices, panelButtons } from "../builder/config";
-
+import { loadBlocks } from "../lib/blocks";
+import { deviceButtons, devices, panelButtons } from "../lib/config";
+import { appendCss } from "../lib/css";
 export default function useEditor(opts) {
     const editor = grapesjs.init({
         container: opts.el,
@@ -11,6 +12,8 @@ export default function useEditor(opts) {
         deviceManager: { devices },
         blockManager: { appendTo: opts.blocks },
         layerManager: { appendTo: opts.layers },
+        traitManager: { appendTo: opts.traits },
+
         panels: {
             defaults: [
                 { id: "layersccsc" },
@@ -22,27 +25,24 @@ export default function useEditor(opts) {
             ],
         },
     });
-
-    editor.BlockManager.add("section-me", {
-        id: "section",
-        label: " <img src='/assets/heroes.png' />",
-        attributes: { class: "gjs-block-section" },
-        content: `<section>
-                        <h1>This is a simple title</h1>
-                        <div>
-
-                        <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-                        <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-                            <span>hugo</span>
-                        </div>
-                        <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-                    </section>`,
-    });
     editor.Panels.addPanel({
         id: "basic-actions",
         el: opts.panels,
         buttons: panelButtons,
     });
+
+    editor.BlockManager.add("nameee", {
+        label: "name",
+        attributes: { class: "" },
+        content: `<section>
+        <h1>This is a simple title</h1>
+        <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
+      </section>`,
+        category: { label: "new", open: false },
+    });
+
+    loadBlocks(editor);
+    appendCss(editor);
 
     return { editor };
 }
