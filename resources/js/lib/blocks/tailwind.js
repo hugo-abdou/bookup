@@ -653,6 +653,8 @@ const sources = [
     },
 ];
 
+
+
 export const loadTailwindBlocks = (newEditor) => {
     const blockManager = newEditor.BlockManager;
 
@@ -661,6 +663,7 @@ export const loadTailwindBlocks = (newEditor) => {
             label: s.label,
             attributes: { class: s.class },
             content: s.content,
+            resetId: true,
             category: { label: s.category, open: s.category === "Blog" },
         });
     });

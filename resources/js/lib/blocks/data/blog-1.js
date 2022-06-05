@@ -83,5 +83,5 @@ const source = `
     </div>
   </div>
 </section>
-  `
+  `;
 export { source }

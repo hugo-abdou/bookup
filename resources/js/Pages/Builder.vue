@@ -4,9 +4,7 @@
             <div ref="panels"></div>
             <div class="panel__devices"></div>
         </div>
-        <div ref="gjs" class="h-[calc(100vh-41px)] shadow-lg">
-            <h1>Hello World Component!</h1>
-        </div>
+        <div ref="gjs" class="h-[calc(100vh-41px)] shadow-lg"></div>
 
         <BuilderSidebarAction buttonClass="right-4" sidebarClass="-right-2">
             <template #button>
@@ -43,13 +41,13 @@ import Button from "@/Jetstream/Button.vue";
 import SecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import JetDropdown from "@/Jetstream/Dropdown.vue";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
-import { TemplateIcon, ViewBoardsIcon,PencilIcon } from "@heroicons/vue/outline";
+import { TemplateIcon, ViewBoardsIcon, PencilIcon } from "@heroicons/vue/outline";
 import BuilderSidebarAction from "../Jetstream/BuilderSidebarAction.vue";
 const scrollClasses =
     "scrollbar-thumb-gray-300 scrollbar-track-gray-50 scrollbar-thin scrollbar-thumb-rounded-full";
 
 export default {
-     components: {
+    components: {
         Actions,
         Button,
         TemplateIcon,
@@ -58,7 +56,8 @@ export default {
         PopoverButton,
         PopoverPanel,
         ViewBoardsIcon,
-        BuilderSidebarAction,PencilIcon
+        BuilderSidebarAction,
+        PencilIcon,
     },
     setup(props) {
         const gjs = ref(null);
@@ -66,7 +65,7 @@ export default {
         const layerManager = ref(null);
         const panels = ref(null);
         const layers = ref(null);
-        const traits = ref(null)
+        const traits = ref(null);
 
         onMounted(() => {
             const { editor } = useEditor({
@@ -75,7 +74,7 @@ export default {
                 layerManager: layerManager.value,
                 panels: panels.value,
                 layers: layers.value,
-                traits: traits.value
+                traits: traits.value,
             });
         });
         return {
@@ -86,10 +85,10 @@ export default {
             scrollClasses,
             layers,
             Button,
-            SecondaryButton,traits
+            SecondaryButton,
+            traits,
         };
     },
-
 };
 </script>
 <style>
@@ -106,6 +105,12 @@ export default {
 }
 .gjs-layer {
     @apply bg-red-300;
+}
+.gjs-trt-trait {
+    @apply flex-col items-start
+}
+.gjs-trt-trait > div {
+    @apply w-full
 }
 .gjs-layer-title-c.gjs-one-bg {
     @apply bg-blue-100;

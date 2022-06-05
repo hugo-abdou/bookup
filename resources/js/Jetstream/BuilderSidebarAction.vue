@@ -20,7 +20,7 @@
             <PopoverPanel
                 :static="true"
                 v-show="open"
-                class="absolute translate-x-0 bg-white border rounded-lg shadow-md min-w-[200px] overflow-auto bottom-11 -top-[calc(100vh-100px)] p-1"
+                class="absolute translate-x-0 bg-white border rounded-lg shadow-md min-w-[300px] overflow-auto bottom-11 -top-[calc(100vh-100px)] p-1"
                 :class="[scrollClasses, sidebarClass]"
             >
                 <slot name="sidebar" />
